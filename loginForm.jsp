@@ -45,6 +45,7 @@
   <title>Login</title>
   </head>
   <body>
+    <!-- This is a header comment -->
     <div id="header">
       <span class="a">
 	      <h1>(name of website)</h1>
