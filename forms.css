@@ -1,0 +1,102 @@
+body {
+  background-color: #222222;
+  font-family: Optima, sans-serif;
+  font-variant: small-caps;
+/*   font-family: "HKGrotesk-Regular","Helvetica Neue",Helvetica,Arial,sans-serif; */
+}
+#navBar {
+	padding: 4px 20px;
+/* 	height: 30px; */
+	width: 100%;
+	background-color: #a8a8a8;
+	text-align: center;
+
+}
+#header {
+	padding: 8px 20px;
+	background-color: white;
+    width: 100%;
+}
+span.a {
+	display: inline-block;
+}
+span.b {
+	display: inline-block;
+	float: right;
+	margin-right: 120px;
+	margin-top: 30px;
+}
+span.c {
+	display: inline-block;
+	float: right;
+	margin-right: 30px;
+	margin-top: 30px;
+}
+#formDiv {
+	width: 550px;
+	color: white;
+	text-align: center;
+	margin: auto;
+}
+h1 {
+	font-size: 35px;
+}
+h2 {
+	font-size: 20px;
+	text-align: left;
+}
+h3 {
+	text-align: center;
+
+	font-size: 30px;
+}
+input[type=text] {
+	padding: 15px;
+	width: 90%;
+	border-radius: 5px;
+	border-width: 1px;
+	border-color: black;
+	border-style: solid;
+	background-color: white;
+
+}
+input[type=text]:focus {
+	background-color: #a8ebff;
+
+}
+#btnDiv {
+	text-align: center;
+}
+#btn {
+	padding: 15px;
+	width: 50%;
+	background-color: #7ca8cb;
+	border-radius: 5px;
+	border-width: 1px;
+	border-color: black;
+	border-style: solid;
+	font-size: 18px;
+	font-family: Optima, sans-serif;
+    font-variant: small-caps;
+}
+#usernameDiv {
+	height: 130px;
+}
+#passwordDiv {
+	height: 130px;
+}
+#confirmPasswordDiv {
+	height: 130px;
+}
+#userErr {
+	color: #ff515d;
+	text-align: left;
+}
+#passErr {
+	color:  #ff515d;
+	text-align: left;
+}
+#confirmPassErr {
+	color:  #ff515d;
+	text-align: left;
+}
