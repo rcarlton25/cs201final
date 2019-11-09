@@ -15,6 +15,8 @@
       var password = document.getElementById('password').value;
       var errors = false;
 
+
+
       $("#userErr").empty();
       $("#passErr").empty();
 
