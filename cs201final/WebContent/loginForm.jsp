@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-  <link rel="stylesheet" href="forms.css">
+  <link rel="stylesheet" href="styles/forms.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script>
 
@@ -13,14 +13,12 @@
     function validate() {
       var username = document.getElementById('username').value;
       var password = document.getElementById('password').value;
-      var confirmPassword = document.getElementById('confirmPassword').value;
-
       var errors = false;
+
+
 
       $("#userErr").empty();
       $("#passErr").empty();
-      $("#confirmPassErr").empty();
-
 
       // if no username entered
       if (username == null || username == "") {
@@ -31,17 +29,6 @@
       if (password == null || password == "") {
         $("#passErr").append("<p>Error: Please enter a password.</p>");
         errors = true;
-      }
-      // if no confirm password entered
-      if (confirmPassword == null || confirmPassword == "") {
-        $("#confirmPassErr").append("<p>Error: Please confirm your password.</p>");
-        errors = true;
-      }
-      // if passwords dont match
-      if (confirmPassword != password) {
-    	 $("#confirmPassErr").empty();
-         $("#confirmPassErr").append("<p>Error: Passwords do not match.</p>");
-         errors = true;
       }
 
       // if no errors (the user entered something in both fields) then send to backend
@@ -55,7 +42,7 @@
   </script>
   <head>
   <meta charset="UTF-8">
-  <title>Register</title>
+  <title>Login</title>
   </head>
   <body>
     <div id="header">
@@ -75,10 +62,10 @@
 
     <div id="formDiv">
       <form name="loginForm" method="GET" >
-      	<h3>Register</h3>
+      	<h3>Login</h3>
       	<div id="usernameDiv">
 	        <h2>Username</h2>
-	        <input type="text" id="username"/>
+	        <input type="text" id="username" />
 	        <div id="userErr"></div>
         </div>
         <div id="passwordDiv">
@@ -86,13 +73,8 @@
 	        <input type="text" id="password" />
 	        <div id="passErr"></div>
 		</div>
-		<div id="confirmPasswordDiv">
-        	<h2>Confirm Password</h2>
-	        <input type="text" id="confirmPassword" />
-	        <div id="confirmPassErr"></div>
-		</div>
 		<div id="btnDiv">
-        	<input class="button" type="button" value="Register" id="btn" />
+        	<input class="button" type="button" value="Sign In" id="btn" />
         </div>
       </form>
     </div>
