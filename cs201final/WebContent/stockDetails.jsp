@@ -6,14 +6,41 @@
 	<head>
 		<link rel="stylesheet" href="styles/stockDetails.css">
 		<link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+		
+		<script>
+			function showWarning() {
+				alert("Please login or register to use this feature!");
+			}
+			
+			function buyStocks() {
+				numToBuy = prompt("How many shares would you like to buy?");
+				// send with Ajax to backend
+				alert("Shares bought.");
+			}
+			
+			function sellStocks() {
+				numToSell = prompt("How many shares would you like to sell?");
+				// send with Ajax to backend
+				alert("Shares sold.");
+			}
+			
+			function saveToWatchlist() {
+				alert("Stock saved to your dashboard!");
+				// send with Ajax to backend
+			}
+		</script>
+		
 	</head>
 	<body>
 		<!-- Save user preferences from the backend -->
-		<!-- using dummy data in 2D arrays for now -->
+		<!-- using dummy data in 2D arrays and boolean for now  -->
+		<!-- Later: use Stock and User object -->
 		<% 
 			String[] stockData = {
 				"Facebook, Inc.", "190.00", "false"
 			};
+		
+			boolean user = true;
 			
 		%>
 		
@@ -47,9 +74,28 @@
 		</table>
 		<table>
 			<tr>
-				<td><button>BUY</button></td>
-				<td><button>SELL</button></td>
-				<td><button>SAVE</button></td>
+				<!-- Disable buttons if not logged in -->
+				<td>
+					<% if (user != true) {%> 
+						<button onclick="showWarning()">BUY</button>
+					<% } else { %>
+						<button onclick="buyStocks()">BUY</button>
+					<% } %>
+				</td>
+				<td>
+					<% if (user != true) {%> 
+						<button onclick="showWarning()">SELL</button>
+					<% } else { %>
+						<button onclick="sellStocks()">SELL</button>
+					<% } %>
+				</td>
+				<td>
+					<% if (user != true) {%> 
+						<button onclick="showWarning()">SAVE</button>
+					<% } else { %>
+						<button onclick="saveToWatchlist()">SAVE</button>
+					<% } %>
+				</td>
 			</tr>
 		</table>
 		
