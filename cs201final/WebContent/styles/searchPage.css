@@ -8,6 +8,7 @@ h1 {
 	text-align: right;
 	margin-right: 15px;
 	color: rgb(182, 193, 224);
+	font-size: 50px;
 }
 
 h2 {
@@ -21,20 +22,9 @@ h2 {
 	background: rgb(127, 127, 127);
 }
 
-button {
-	background: none;
-	border: none;
-	padding: 0;
-	font-family: 'Nunito', sans-serif;
-	color: rgb(255, 255, 255);
-	font-size: 16px;
-}
-
-table {
-	border-collapse: collapse;
-	width: 90%;
-	margin-left: 5%;
-	margin-right: 5%;
+.pageContent{
+	width: 75%;
+	margin: 0 auto;
 }
 
 .upStock {
@@ -43,4 +33,48 @@ table {
 
 .downStock {
 	background: rgb(114, 142, 115);
+}
+
+.searchForm{
+	width: 100%;
+	margin: 75px auto;
+}
+
+.searchBar {
+    -webkit-appearance: none;
+/*     width: 72.5%;
+ */    
+ 	width: 98%;
+ 	min-width: 380px;
+    height: 100px;
+    box-sizing: content-box;
+    font-size: 30px;
+	font-family: 'Nunito', sans-serif;
+    padding: 0 0 0 25px;
+    border: 0;
+    background-color: #232938;
+    color: white;
+}
+
+.submitButton {
+    font-size: 25px;
+	font-family: 'Nunito', sans-serif;
+    background-color:#003344;
+    color: white;
+    width: 25%;
+    min-width: 115px;
+    height: 75px;
+    border-width: 0;
+    padding: 5px 0;
+}
+
+.searchResult{
+	background-color: #94A5D1;
+	padding: 20px;
+	font-size: 30px;
+	margin: 15px 0;
+}
+
+.stockName{
+	float: right;
 }

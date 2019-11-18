@@ -5,6 +5,8 @@ pageEncoding="UTF-8"%> <%@ page import="java.util.*" %>
   <head>
     <link rel="stylesheet" href="styles/searchPage.css" />
     <link rel="stylesheet" href="styles/navbar.css" />
+    
+    
     <link
       href="https://fonts.googleapis.com/css?family=Nunito&display=swap"
       rel="stylesheet"
@@ -36,9 +38,35 @@ pageEncoding="UTF-8"%> <%@ page import="java.util.*" %>
     </ul>
 
     <div id="border"></div>
+    
+    <div class="pageContent">
+    
 
-    <h1>
-      SEARCH
-    </h1>
+	    <h1>
+	      SEARCH
+	    </h1>
+    
+    
+	    <form class="searchForm">
+	    	<input type="search" name="searchValue" class="searchBar" placeholder="Type a stock name here" required>
+<!-- 	    	<input type="submit" name="submitButton" class="submitButton" value="SEARCH" required>
+ -->	</form>
+ 
+ 		<div class="searchResults">
+ 			<div class="searchResult">
+ 				<span class="tickerSymbol">GOOG</span> <span class="stockName">Alphabet</span>
+ 			</div>
+ 			<div class="searchResult">
+ 				<span class="tickerSymbol">GOOGL</span> <span class="stockName">Alphabet</span>
+ 			</div>
+ 			<div class="searchResult">
+ 				<span class="tickerSymbol">GOOS</span> <span class="stockName">Canadian Goose</span>
+ 			</div>
+ 		</div>
+ 		
+	    
+    </div>
+    
+    
   </body>
 </html>
