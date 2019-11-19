@@ -30,29 +30,15 @@ button {
 	font-size: 16px;
 }
 
-ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-}
-
-li {
-	display: inline;
-}
-
-.leftNav, .rightNav {
-	max-width: 5%;
-}
-
-.rightNav {
-	float: right;
-}
-
 table {
 	border-collapse: collapse;
 	width: 90%;
 	margin-left: 5%;
 	margin-right: 5%;
+}
+
+td {
+	padding-left: 10px;
 }
 
 .upStock {
