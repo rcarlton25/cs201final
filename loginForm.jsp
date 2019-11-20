@@ -14,9 +14,7 @@
       var username = document.getElementById('username').value;
       var password = document.getElementById('password').value;
       var errors = false;
-
-
-
+      
       $("#userErr").empty();
       $("#passErr").empty();
 
@@ -47,19 +45,32 @@
   <body>
     <!-- This is a header comment -->
     <div id="header">
-      <span class="a">
-	      <h1>(name of website)</h1>
-	  </span>
-	  <span class="b">
-	      <a href="loginForm.jsp">Login</a>
-	  </span>
-	  <span class="c">
-	      <a href="registerForm.jsp">Register</a>
-      </span>
+    	<ul>
+			<li><a href="userDashboard.jsp"><img class="leftNav" src="images/newgraydashboardicon.png"></a></li>
+			<li><a href="searchPage.jsp"><img class="leftNav" src="images/newgraysearchicon.png"></a></li>
+			<li><a href="screenerTool.jsp"><img class="rightNav" src="images/grayscreenicon.png"></a></li>
+			<li><a href="userProfile.jsp"><img class="rightNav" src="images/newgrayprofileicon.png"></a></li>
+		</ul>
+		
+		<div id="border"></div>
+    
+    
+    
+<!--       <span class="a"> -->
+<!-- 	      <h1>(name of website)</h1> -->
+<!-- 	  </span> -->
+<!-- 	  <span class="b"> -->
+<!-- 	      <a href="loginForm.jsp">Login</a> -->
+<!-- 	  </span> -->
+<!-- 	  <span class="c"> -->
+<!-- 	      <a href="registerForm.jsp">Register</a> -->
+<!--       </span> -->
+      
     </div>
-    <div id="navBar">
-      <p>nav bar will go here</p>
-    </div>
+    
+<!--     <div id="navBar"> -->
+<!--       <p>nav bar will go here</p> -->
+<!--     </div> -->
 
     <div id="formDiv">
       <form name="loginForm" method="GET" >
