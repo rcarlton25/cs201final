@@ -6,11 +6,32 @@ pageEncoding="UTF-8"%> <%@ page import="java.util.*" %>
     <link rel="stylesheet" href="styles/searchPage.css" />
     <link rel="stylesheet" href="styles/navbar.css" />
     
-    
     <link
       href="https://fonts.googleapis.com/css?family=Nunito&display=swap"
       rel="stylesheet"
     />
+    
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    
+    <script>
+    function makeApiCall(){
+    	event.preventDefault();
+    	
+/*     	below code makes API call previously done in Search.java and correctly recieves JSON data as response */    	
+ 
+ 		let url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY"
+			+ "&symbol="
+			+ document.searchForm.searchValue.value
+			+ "&interval=5min"
+			+ "&apikey=JG4Q2Y4CORWL03SQ";
+    	 
+    	$.get(url, function(data) {
+        console.log(data);
+    });
+	
+    }
+    </script>
   </head>
   <body>
     <!-- Nav bar at top -->
@@ -47,10 +68,9 @@ pageEncoding="UTF-8"%> <%@ page import="java.util.*" %>
 	    </h1>
     
     
-	    <form class="searchForm">
-	    	<input type="search" name="searchValue" class="searchBar" placeholder="Type a stock name here" required>
-<!-- 	    	<input type="submit" name="submitButton" class="submitButton" value="SEARCH" required>
- -->	</form>
+	    <form name="searchForm" class="searchForm" action="" onsubmit="makeApiCall();">
+	    	<input type="search" name="searchValue" class="searchBar" placeholder="Type a stock ticker symbol here (ie. FB)" required>
+		</form>
  
  		<div class="searchResults">
  			<div class="searchResult">
