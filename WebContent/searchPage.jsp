@@ -6,7 +6,6 @@ pageEncoding="UTF-8"%> <%@ page import="java.util.*" %>
     <link rel="stylesheet" href="styles/searchPage.css" />
     <link rel="stylesheet" href="styles/navbar.css" />
     
-    
     <link
       href="https://fonts.googleapis.com/css?family=Nunito&display=swap"
       rel="stylesheet"
