@@ -13,9 +13,9 @@
 		<script>
 			function callServlet(){
 				event.preventDefault();
-				$.get("", function(data) {
+				/* $.get("", function(data) {
 			        console.log(data);
-			    });
+			    }); */
 				console.log("submitted");
 			}
 		</script>
@@ -61,6 +61,17 @@
     		<input type="submit" class="submitButton">
     	</form>
     	
+    	<div class="searchResults">
+ 			<div class="searchResult">
+ 				<span class="tickerSymbol">GOOG</span> <span class="stockName">Alphabet</span>
+ 			</div>
+ 			<div class="searchResult">
+ 				<span class="tickerSymbol">GOOGL</span> <span class="stockName">Alphabet</span>
+ 			</div>
+ 			<div class="searchResult">
+ 				<span class="tickerSymbol">GOOS</span> <span class="stockName">Canadian Goose</span>
+ 			</div>
+ 		</div>
     </div>
  	
   	</body>
