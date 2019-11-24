@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ page import="Screener.StockData" %>
+ <%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -7,15 +9,39 @@
 		<link rel="stylesheet" href="styles/navbar.css" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<link
-      href="https://fonts.googleapis.com/css?family=Nunito&display=swap"
-      rel="stylesheet"
-    />
+	      href="https://fonts.googleapis.com/css?family=Nunito&display=swap"
+	      rel="stylesheet"
+	    />
 		<script>
+				
 			function callServlet(){
 				event.preventDefault();
-				/* $.get("", function(data) {
-			        console.log(data);
-			    }); */
+				
+				let min = document.screenerForm.min.value;
+				let max = document.screenerForm.max.value;
+				let marketcap = document.screenerForm.marketcap.value;
+				
+				console.log("min: " + min);
+				console.log("max: " + max);
+				console.log("cap: " + marketcap);
+
+				let url = "ScreeningServlet?min=" + min + "&max=" + max + "&cap=" + marketcap;
+				
+				$.get(url, function(res)){
+					
+				}
+				
+				<%-- $.get(url, function(res){
+					
+				/* 	response in results attribute*/		
+				/* data is made up of StockData objects */
+ 					let data = <%= request.getAttribute("results")%>;
+					for (let i=0; i<data.length; i++){
+						console.log(data[1].getPrice());
+						
+					}
+				});
+				 --%>
 				console.log("submitted");
 			}
 		</script>
@@ -63,15 +89,19 @@
     	
     	<div class="searchResults">
  			<div class="searchResult">
- 				<span class="tickerSymbol">GOOG</span> <span class="stockName">Alphabet</span>
+ 				<span class="tickerSymbol"></span> <span class="stockName"></span>
  			</div>
- 			<div class="searchResult">
- 				<span class="tickerSymbol">GOOGL</span> <span class="stockName">Alphabet</span>
- 			</div>
- 			<div class="searchResult">
- 				<span class="tickerSymbol">GOOS</span> <span class="stockName">Canadian Goose</span>
- 			</div>
+ 			<%-- <% ArrayList<StockData> results = (ArrayList<StockData>) request.getAttribute("results");
+ 			 for(int i = 0; i < results.size(); i++) { %>
+	 			<div class="searchResult">
+	 				<span class="tickerSymbol"><%= results.get(i).getSymbol() %></span> <span class="stockName"> <%=results.get(i).getName() %></span>
+	 			</div>
+ 			<% } %>
+ 			 --%>
+ 			
+ 			
  		</div>
+ 		
     </div>
  	
   	</body>
