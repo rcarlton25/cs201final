@@ -3,8 +3,21 @@ package Screener;
 public class StockData {
 	public String symbol;
 	public String name;
-	public String currency;
 	public String price;
-	public String stock_exchange_long;
-	public String stock_exchange_short;
+//	public Double 52_week_high;
+//	public Double 52_week_low;
+	public String market_cap;
+	
+	public String getSymbol() {
+		return this.symbol;
+	}
+	public String getName() {
+		return this.name;
+	}
+	public String price() {
+		return this.price;
+	}
+	public String getMarketCap() {
+		return this.market_cap;
+	}
 }
