@@ -12,39 +12,6 @@
 	      href="https://fonts.googleapis.com/css?family=Nunito&display=swap"
 	      rel="stylesheet"
 	    />
-		<script>
-				
-			function callServlet(){
-				event.preventDefault();
-				
-				let min = document.screenerForm.min.value;
-				let max = document.screenerForm.max.value;
-				let marketcap = document.screenerForm.marketcap.value;
-				
-				console.log("min: " + min);
-				console.log("max: " + max);
-				console.log("cap: " + marketcap);
-
-				let url = "ScreeningServlet?min=" + min + "&max=" + max + "&cap=" + marketcap;
-				
-				$.get(url, function(res)){
-					
-				}
-				
-				<%-- $.get(url, function(res){
-					
-				/* 	response in results attribute*/		
-				/* data is made up of StockData objects */
- 					let data = <%= request.getAttribute("results")%>;
-					for (let i=0; i<data.length; i++){
-						console.log(data[1].getPrice());
-						
-					}
-				});
-				 --%>
-				console.log("submitted");
-			}
-		</script>
 	</head>
   
  	<body>
@@ -79,11 +46,10 @@
     
         <h1>SCREENER</h1>
     
-    
     	<form name="screenerForm" class="screenerForm" action="" onsubmit="callServlet();">
-    		<input type="number" name="min" placeholder="Min Cost"/>
-    		<input type="number" name="max" placeholder="Max Cost"/>
-    		<input type="number" name="marketcap" placeholder="Market Cap"/>
+    		<input type="number" step="0.01" name="min" placeholder="Min Cost"/>
+    		<input type="number" step="0.01" name="max" placeholder="Max Cost"/>
+    		<input type="number" step="0.01" name="marketcap" placeholder="Market Cap"/>
     		<input type="submit" class="submitButton">
     	</form>
     	
@@ -91,6 +57,7 @@
  			<div class="searchResult">
  				<span class="tickerSymbol"></span> <span class="stockName"></span>
  			</div>
+ 			
  			<%-- <% ArrayList<StockData> results = (ArrayList<StockData>) request.getAttribute("results");
  			 for(int i = 0; i < results.size(); i++) { %>
 	 			<div class="searchResult">
