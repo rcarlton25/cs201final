@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Screener.StockResult;
+import Screener.StockData;
 import Screener.ScreenData;
 
 /**
@@ -35,36 +37,24 @@ public class ScreeningServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// make sure the 'name' attrs are exactly as follows:
-		// define all possible search parameters
-		List<String> search_params = Arrays.asList("search_term", "api_token", "search_by", "stock_exchange", "currency", "limit", "page", "sort_by", "sort_order", "output");
-		
-		// build dictionary to keep track of search parameters and corresponding user input
-		Map<String, String> params = new HashMap<String, String>();
-		
-		for (String p : search_params) {
-			String userInput = request.getParameter(p);
-			
-			// user entered valid input for search param, p
-			if(userInput != null && !p.isEmpty()) {
-				params.put(p, userInput);
 				
-			// user did not enter input for search param, p
-			// non-entered values = null
-			} else {
-				params.put(p, null);
-			}
-		}
-		
 		// make GET request to screening API
-		String jsonResults = ScreenData.getData(search_params, params);
+		ArrayList<StockData> results = null;
+		try {
+			// # of batches
+			int numGroups = 1;
+			results = ScreenData.getData(numGroups);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(results.size());
 		
-		// set attributes
-		request.setAttribute("data", jsonResults);
+		// set attributes (results = arraylist of StockData objects)
+		request.setAttribute("results", results);
 //		session.setAttribute("data", jsonResults);
 					
 		// send to screening page here (FILL THIS OUT!)
-		RequestDispatcher dispatch = getServletContext().getRequestDispatcher("???????????");
+		RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/test.jsp");
         dispatch.forward(request, response);
 		
 	

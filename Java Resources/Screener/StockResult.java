@@ -1,10 +1,17 @@
 package Screener;
 
 public class StockResult {
-	public int total_returned;
-	public int total_results;
-	public int total_pages;
-	public int limit;
-	public int page;
+	public int symbols_requested;
+	public int symbols_returned;
 	public StockData[] data;
+	
+	public int getSymbolsRequested() {
+		return this.symbols_requested;
+	}
+	public int getSymbolsReturned() {
+		return this.symbols_returned;
+	}
+	public StockData[] getStockData() {
+		return this.data;
+	}
 }
