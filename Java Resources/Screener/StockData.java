@@ -14,7 +14,7 @@ public class StockData {
 	public String getName() {
 		return this.name;
 	}
-	public String price() {
+	public String getPrice() {
 		return this.price;
 	}
 	public String getMarketCap() {
