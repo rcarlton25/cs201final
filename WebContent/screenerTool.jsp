@@ -47,9 +47,9 @@
         <h1>SCREENER</h1>
     
     	<form name="screenerForm" class="screenerForm" method="GET" action="ScreeningServlet" >
-    		<input type="number" step="0.01" name="min" placeholder="Min Cost"/>
-    		<input type="number" step="0.01" name="max" placeholder="Max Cost"/>
-    		<input type="number" step="0.01" name="marketcap" placeholder="Market Cap"/>
+    		<input type="number" step="0.01" min="0" name="min" placeholder="Min Cost"/>
+    		<input type="number" step="0.01" min="0" name="max" placeholder="Max Cost"/>
+    		<input type="number" step="0.01" min="0" name="marketcap" placeholder="Market Cap"/>
     		<input type="submit" class="submitButton">
     	</form>
     	
