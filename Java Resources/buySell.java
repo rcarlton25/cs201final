@@ -31,7 +31,6 @@ public class buySell extends HttpServlet {
 		ResultSet rsss = null;
 		try {
 			HttpSession session = request.getSession(true);
-			session.setAttribute("userID", 1); //Remove later
 			int userID = (int)session.getAttribute("userID");
 		
 			String ticker = request.getParameter("ticker");
