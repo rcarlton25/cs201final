@@ -18,17 +18,16 @@ pageEncoding="UTF-8"%> <%@ page import="java.util.*" %>
     function makeApiCall(){
     	event.preventDefault();
     	
-/*     	below code makes API call previously done in Search.java and correctly recieves JSON data as response */    	
- 
- 		let url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY"
-			+ "&symbol="
+/*     	below code makes API call previously done in Search.java and correctly recieves JSON data as response */    	 
+			
+ 		let url = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH"
+			+ "&keywords="
 			+ document.searchForm.searchValue.value
-			+ "&interval=5min"
 			+ "&apikey=JG4Q2Y4CORWL03SQ";
     	 
     	$.get(url, function(data) {
-        console.log(data);
-    });
+        	console.log(data);
+    	});
 	
     }
     </script>
