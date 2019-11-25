@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +23,7 @@ public class profile extends HttpServlet {
     
     //FRONTEND: in front get attributes stockData, watchlistData, and cash
     protected void service (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	Connection co = null;
+    	Connection co = null; 
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		int i = 0;
@@ -69,6 +70,9 @@ public class profile extends HttpServlet {
 			request.setAttribute("stockData", buy);
 			request.setAttribute("watchlistData", fav);
 			request.setAttribute("cash", cash);
+			String next = "/userDashboard.jsp";
+			RequestDispatcher dispatch = getServletContext().getRequestDispatcher(next);
+			dispatch.forward(request, response);
 		}
 		catch (SQLException sqle){
 			sqle.printStackTrace();
@@ -82,3 +86,4 @@ public class profile extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);}
 }
+
