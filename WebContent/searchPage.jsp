@@ -90,7 +90,7 @@ pageEncoding="UTF-8"%> <%@ page import="java.util.*" %>
     
     
 	    <form name="searchForm" class="searchForm" action="" onsubmit="makeApiCall();">
-	    	<input type="search" name="searchValue" class="searchBar" placeholder="Type a stock ticker symbol here (ie. FB)" required>
+	    	<input type="search" name="searchValue" class="searchBar" placeholder="Type a stock name or ticker symbol here (ie. Facebook or FB)" required>
 		</form>
  
  
