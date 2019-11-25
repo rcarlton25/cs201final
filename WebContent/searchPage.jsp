@@ -26,8 +26,30 @@ pageEncoding="UTF-8"%> <%@ page import="java.util.*" %>
 			+ "&apikey=JG4Q2Y4CORWL03SQ";
     	 
     	$.get(url, function(data) {
-        	console.log(data);
-    	});
+    		/* delete previous results before rendering new results */
+    		$("#searchResults").empty();
+
+    		let resultsArray = data.bestMatches;
+    		
+    		resultsArray.forEach(function(result){
+    			
+    			let resultDiv = document.createElement('div');
+    			resultDiv.className = "searchResult";
+    			
+    			let tickerSymbol = document.createElement('span');
+    			tickerSymbol.className = "tickerSymbol";
+    			tickerSymbol.innerHTML = result["1. symbol"];
+    			
+    			let stockName = document.createElement('span');
+    			stockName.className = "stockName";
+    			stockName.innerHTML = result["2. name"];
+    			
+    			resultDiv.append(tickerSymbol, stockName);
+    			
+    			$("#searchResults").append(resultDiv);
+    		
+    		}) ;
+   	});
 	
     }
     </script>
@@ -71,17 +93,8 @@ pageEncoding="UTF-8"%> <%@ page import="java.util.*" %>
 	    	<input type="search" name="searchValue" class="searchBar" placeholder="Type a stock ticker symbol here (ie. FB)" required>
 		</form>
  
- 		<div class="searchResults">
- 			<div class="searchResult">
- 				<span class="tickerSymbol">GOOG</span> <span class="stockName">Alphabet</span>
- 			</div>
- 			<div class="searchResult">
- 				<span class="tickerSymbol">GOOGL</span> <span class="stockName">Alphabet</span>
- 			</div>
- 			<div class="searchResult">
- 				<span class="tickerSymbol">GOOS</span> <span class="stockName">Canadian Goose</span>
- 			</div>
- 		</div>
+ 
+ 		<div class="searchResults" id="searchResults"></div>
  		
 	    
     </div>
