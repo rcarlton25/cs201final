@@ -41,9 +41,7 @@ h2 {
 }
 
 .searchBar {
-    -webkit-appearance: none;
-/*     width: 72.5%;
- */    
+    -webkit-appearance: none;  
  	width: 98%;
  	min-width: 380px;
     height: 100px;
@@ -73,6 +71,12 @@ h2 {
 	padding: 20px;
 	font-size: 30px;
 	margin: 15px 0;
+}
+
+.searchResult:hover{
+	background-color: #B4C1E3;
+	transition: .25s;
+	cursor: pointer;
 }
 
 .stockName{
