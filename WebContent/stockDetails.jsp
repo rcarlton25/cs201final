@@ -5,6 +5,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="styles/stockDetails.css">
+		<link rel="stylesheet" href="styles/navbar.css">
 		<link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
 		
 		<script>
