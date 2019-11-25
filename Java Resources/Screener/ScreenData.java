@@ -78,13 +78,13 @@ public class ScreenData {
 				Gson gson = builder.create();
 				
 				StockResult res = gson.fromJson(jsonString, StockResult.class);
-				String json = gson.toJson(results);
+				String json = gson.toJson(res);
 			
 				
 				// get list of StockData, append to total list
 				StockData[] data = res.getStockData();
 				for(StockData d: data) {
-					System.out.println("data val market cap: " + d.getMarketCap());
+//					System.out.println("data val market cap: " + d.getMarketCap());
 					results.add(d);
 				}
 				
