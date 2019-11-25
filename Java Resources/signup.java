@@ -1,11 +1,10 @@
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,12 +27,13 @@ public class signup extends HttpServlet {
 		Connection co = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		String error = "";
 		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String confirmPassword = request.getParameter("confirmPassword");
-		String nextPage = "/registerForm.jsp";
 		String dbUsername = "";
+		System.out.println("u: " + username + " p: " + password + " cp: " + confirmPassword);
 		try {	
 			HttpSession session = request.getSession(true);
 			co = DriverManager.getConnection("jdbc:mysql://google/csfinal?cloudSqlInstance=cs-final-258501:us-central1:csfinal&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=csfinal&password=csfinal");
@@ -47,14 +47,16 @@ public class signup extends HttpServlet {
 			if(dbUsername.contentEquals(username)) { //If username already exists
 				System.out.println("username taken");
 				request.setAttribute("registerErr", "Username is already taken");
+				error = "Username is already taken";
 			}
 			else if(!password.contentEquals(confirmPassword) ){ //if passwords don't match
 				System.out.println("passwords dont match");
 				request.setAttribute("registerErr", "Passwords don't match");
+				error = "Passwords don't match";
+				
 			}
 			else { //create new user, add to database, forward to home
 				System.out.println("new user made");
-				nextPage = "/homePage.jsp";
 				ps = co.prepareStatement("insert into users (username, password, cash) values (?, ?, 10000.000)");
 				ps.setString(1, username);
 				ps.setString(2, confirmPassword);
@@ -71,9 +73,10 @@ public class signup extends HttpServlet {
 			ps.close();
 			rs.close();
 			
-			System.out.println(nextPage);
-			RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);         
-	        dispatch.forward(request, response);
+			PrintWriter pw = response.getWriter();
+	    	pw.write(error);
+	    	pw.flush();
+	    	pw.close();
 		} catch (SQLException sqle){
 			System.out.println("SQLException: " + sqle.getMessage());
 			
