@@ -37,7 +37,9 @@ public class ScreeningServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				
+		
+		System.out.println("HELLO");
+		
 		// make GET request to screening API
 		ArrayList<StockData> results = null;
 		try {
@@ -47,14 +49,75 @@ public class ScreeningServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(results.size());
+		// get input parameters from user form
+		String minPriceStr 			= request.getParameter("min");
+		String maxPriceStr			= request.getParameter("max");
+		String inputMarketCapStr	= request.getParameter("marketcap");
+		
+		double min = 0;
+		double max = 0;
+		double mcap = 0;
+		
+		try {
+			min = Double.parseDouble(minPriceStr);
+		} catch (Exception e) {
+			min = 0;
+		}
+		
+		try {
+			max = Double.parseDouble(maxPriceStr);
+		} catch (Exception e) {
+			max = 99999999999.99;
+		}
+		
+		try {
+			mcap = Double.parseDouble(inputMarketCapStr);
+		} catch (Exception e) {
+			mcap = 0.0;
+		}
+		
+		ArrayList<StockData> finalData = new ArrayList<StockData>();
+		for(int i = 0; i < results.size(); i++) {
+			StockData data = results.get(i);
+			
+			double dataPrice = 0.0;
+			double dataMCap = 0.0;
+			
+			try {
+				dataPrice = Double.parseDouble(data.getPrice());
+			} catch(Exception e ) {
+				dataPrice = 0.0;
+			}
+			try {
+				dataMCap = Double.parseDouble(data.getMarketCap());
+			} catch(Exception e ) {
+				dataMCap = 0.0;
+			}
+						
+			// check user input
+			if(dataPrice >= min && dataPrice <= max) {
+				// market cap  set
+				if(mcap != 0.0) {
+					if(dataMCap >= mcap) {
+						finalData.add(data);
+					}
+				// market cap not set
+				} else {
+					finalData.add(data);
+				}
+				
+			}
+			
+		}
+
+		System.out.println("servlet: " + minPriceStr + " " + maxPriceStr + " " + inputMarketCapStr);
 		
 		// set attributes (results = arraylist of StockData objects)
-		request.setAttribute("results", results);
+		request.setAttribute("results", finalData);
 //		session.setAttribute("data", jsonResults);
 					
 		// send to screening page here (FILL THIS OUT!)
-		RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/test.jsp");
+		RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/screenerTool.jsp");
         dispatch.forward(request, response);
 		
 	
