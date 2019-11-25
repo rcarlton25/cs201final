@@ -6,11 +6,53 @@ pageEncoding="UTF-8"%> <%@ page import="java.util.*" %>
     <link rel="stylesheet" href="styles/searchPage.css" />
     <link rel="stylesheet" href="styles/navbar.css" />
     
-    
     <link
       href="https://fonts.googleapis.com/css?family=Nunito&display=swap"
       rel="stylesheet"
     />
+    
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    
+    <script>
+    function makeApiCall(){
+    	event.preventDefault();
+    	
+/*     	below code makes API call previously done in Search.java and correctly recieves JSON data as response */    	 
+			
+ 		let url = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH"
+			+ "&keywords="
+			+ document.searchForm.searchValue.value
+			+ "&apikey=JG4Q2Y4CORWL03SQ";
+    	 
+    	$.get(url, function(data) {
+    		/* delete previous results before rendering new results */
+    		$("#searchResults").empty();
+
+    		let resultsArray = data.bestMatches;
+    		
+    		resultsArray.forEach(function(result){
+    			
+    			let resultDiv = document.createElement('div');
+    			resultDiv.className = "searchResult";
+    			
+    			let tickerSymbol = document.createElement('span');
+    			tickerSymbol.className = "tickerSymbol";
+    			tickerSymbol.innerHTML = result["1. symbol"];
+    			
+    			let stockName = document.createElement('span');
+    			stockName.className = "stockName";
+    			stockName.innerHTML = result["2. name"];
+    			
+    			resultDiv.append(tickerSymbol, stockName);
+    			
+    			$("#searchResults").append(resultDiv);
+    		
+    		}) ;
+   	});
+	
+    }
+    </script>
   </head>
   <body>
     <!-- Nav bar at top -->
@@ -47,22 +89,12 @@ pageEncoding="UTF-8"%> <%@ page import="java.util.*" %>
 	    </h1>
     
     
-	    <form class="searchForm">
-	    	<input type="search" name="searchValue" class="searchBar" placeholder="Type a stock name here" required>
-<!-- 	    	<input type="submit" name="submitButton" class="submitButton" value="SEARCH" required>
- -->	</form>
+	    <form name="searchForm" class="searchForm" action="" onsubmit="makeApiCall();">
+	    	<input type="search" name="searchValue" class="searchBar" placeholder="Type a stock ticker symbol here (ie. FB)" required>
+		</form>
  
- 		<div class="searchResults">
- 			<div class="searchResult">
- 				<span class="tickerSymbol">GOOG</span> <span class="stockName">Alphabet</span>
- 			</div>
- 			<div class="searchResult">
- 				<span class="tickerSymbol">GOOGL</span> <span class="stockName">Alphabet</span>
- 			</div>
- 			<div class="searchResult">
- 				<span class="tickerSymbol">GOOS</span> <span class="stockName">Canadian Goose</span>
- 			</div>
- 		</div>
+ 
+ 		<div class="searchResults" id="searchResults"></div>
  		
 	    
     </div>
