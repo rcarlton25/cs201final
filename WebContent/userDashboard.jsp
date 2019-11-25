@@ -10,18 +10,10 @@
 	</head>
 	<body>
 		<!-- Save user preferences from the backend -->
-		<!-- using dummy data in 2D arrays for now -->
 		<% 
-			String[][] stockData = {
-				{"FB", "2", "190.00", "false"},
-				{"GOOGL", "1", "1308.00", "true"},
-				{"AAPL", "2", "260.00", "false"},
-			};
+			String[][] stockData = (String[][])request.getAttribute("stockData");
 			
-			String[][] watchlistData = {
-				{"AMZN", "190.00", "true"},
-				{"DOWJ", "130000.00", "true"}
-			};
+			String[][] watchlistData = (String[][])request.getAttribute("watchlistData");
 			
 		%>
 		
@@ -43,16 +35,11 @@
 		<h2>Stocks</h2>
 		<table>
 			<% for (int i = 0; i < stockData.length; i++) {%>
-			
-				<% if ("true".equals(stockData[i][3])) {%>
-					<tr class="upStock">
-				<%} else {%>
-					<tr class="downStock">
-				<% } %>
-					<!-- To redirect to details page for the stock, use a form -->
+				<tr class="upStock">
+				<!-- To redirect to details page for the stock, use a form -->
 					<td>
 						<form name="stockDetails" method="GET" action="stockDetails.jsp">
-							<input name="tickerSymbol" value=<%= stockData[i][0] %> hidden>
+							<input hidden=true name="tickerSymbol" value=<%= stockData[i][0] %>>
 								<button type="submit">
 									<%=  stockData[i][0]%>
 								</button>
@@ -69,13 +56,8 @@
 		<h2>Watchlist</h2>
 		<table>
 			<% for (int i = 0; i < watchlistData.length; i++) {%>
-				<% if ("true".equals(watchlistData[i][2])) {%>
-					<tr class="upStock">
-				<%} else {%>
-					<tr class="downStock">
-				<% } %>
+				<tr class ="upStock">
 					<td><%= watchlistData[i][0]%></td>
-					<td><%= watchlistData[i][1]%></td>
 				</tr>
 			<% } %>
 		</table>
