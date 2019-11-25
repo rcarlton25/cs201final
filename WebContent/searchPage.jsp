@@ -31,6 +31,11 @@ pageEncoding="UTF-8"%> <%@ page import="java.util.*" %>
 
     		let resultsArray = data.bestMatches;
     		
+    		if(resultsArray.length === 0){
+        		$("#searchResults").text("No results for " + document.searchForm.searchValue.value + ".");
+
+    		}
+    		
     		resultsArray.forEach(function(result){
     			
     			let resultDiv = document.createElement('div');
