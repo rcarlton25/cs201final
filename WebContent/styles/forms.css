@@ -46,10 +46,12 @@ h1 {
 h2 {
 	font-size: 17px;
 	text-align: left;
+	color: white;
 }
 h3 {
 	text-align: center;
 	font-size: 25px;
+	color: #94A5D1;
 }
 input[type=text] {
 	padding: 15px;
@@ -62,7 +64,7 @@ input[type=text] {
 
 }
 input[type=text]:focus {
-	background-color: #a8ebff;
+	background-color: #D4DBEB;
 
 }
 #btnDiv {
@@ -71,7 +73,7 @@ input[type=text]:focus {
 #btn {
 	padding: 15px;
 	width: 50%;
-	background-color: rgb(151, 165, 205);
+	background-color: #94A5D1;
 	  color: white;
 
 	border-radius: 5px;
@@ -93,15 +95,20 @@ input[type=text]:focus {
 	height: 130px;
 }
 #userErr {
-	color: #ff515d;
+	color: #BD4F6C;
 	text-align: left;
 }
 #passErr {
-	color:  #ff515d;
+	color:  #BD4F6C;
 	text-align: left;
 }
 #confirmPassErr {
-	color:  #ff515d;
+	color:  #BD4F6C;
+	text-align: left;
+}
+#error {
+	margin-top: 12px;
+	color:  #BD4F6C;
 	text-align: left;
 }
 
@@ -113,13 +120,12 @@ ul {
 }
 
 li {
-	display: inline;
+	display: block;
 }
 
 .leftNav, .rightNav {
 	max-width: 5%;
 }
-
 .rightNav {
 	float: right;
 }
