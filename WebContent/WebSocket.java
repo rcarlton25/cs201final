@@ -4,7 +4,7 @@
  import javax.websocket.*; // for space 
  import javax.websocket.server.ServerEndpoint; 
  
- @ServerEndpoint(value = "/ws") 
+ @ServerEndpoint(value = "/WebSocket") 
  public class WebSocket 
  { 
 	 private static Vector<Session> sessionVector = new Vector<Session>(); 
