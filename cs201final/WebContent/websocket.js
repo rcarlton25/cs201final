@@ -5,7 +5,7 @@ function connect() {
     var host = document.location.host;
     var pathname = document.location.pathname;
 
-    ws = new WebSocket("ws://localhost:9080/Jenny_Final/WebSocket");
+    ws = new WebSocket("ws://localhost:9080/201_final_myfeatures/WebSocket");
 
     ws.onmessage = function(event) {
     var log = document.getElementById("log");

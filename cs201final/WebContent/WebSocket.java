@@ -20,6 +20,8 @@
 		 try { 
 			 for(Session s : sessionVector) 
 			 { 
+				 
+				 // push notification back to user 
 				 s.getBasicRemote().sendText(message); 
 			 }
 		 } catch (IOException ioe) 
