@@ -26,22 +26,11 @@
 				console.log("cap: " + marketcap);
 
 				let url = "ScreeningServlet?min=" + min + "&max=" + max + "&cap=" + marketcap;
-				
-				$.get(url, function(res)){
-					
-				}
-				
-				<%-- $.get(url, function(res){
-					
-				/* 	response in results attribute*/		
-				/* data is made up of StockData objects */
- 					let data = <%= request.getAttribute("results")%>;
-					for (let i=0; i<data.length; i++){
-						console.log(data[1].getPrice());
-						
-					}
+
+				$.get(url, function(res){
 				});
-				 --%>
+				
+				
 				console.log("submitted");
 			}
 		</script>
@@ -80,7 +69,7 @@
         <h1>SCREENER</h1>
     
     
-    	<form name="screenerForm" class="screenerForm" action="" onsubmit="callServlet();">
+    	<form name="screenerForm" class="screenerForm" method="GET" action="ScreeningServlet">
     		<input type="number" name="min" placeholder="Min Cost"/>
     		<input type="number" name="max" placeholder="Max Cost"/>
     		<input type="number" name="marketcap" placeholder="Market Cap"/>
@@ -88,16 +77,27 @@
     	</form>
     	
     	<div class="searchResults">
- 			<div class="searchResult">
- 				<span class="tickerSymbol"></span> <span class="stockName"></span>
- 			</div>
- 			<%-- <% ArrayList<StockData> results = (ArrayList<StockData>) request.getAttribute("results");
- 			 for(int i = 0; i < results.size(); i++) { %>
-	 			<div class="searchResult">
-	 				<span class="tickerSymbol"><%= results.get(i).getSymbol() %></span> <span class="stockName"> <%=results.get(i).getName() %></span>
-	 			</div>
- 			<% } %>
- 			 --%>
+ 			<% if(request.getAttribute("results") != null){
+ 				ArrayList<StockData> results = (ArrayList<StockData>) request.getAttribute("results");
+ 	 			System.out.println("results  = " + results.size());
+ 	 			
+ 	 			
+ 	 			for(int i = 0; i < results.size(); i++) { 
+ 	 				String symbol = results.get(i).getSymbol();
+ 	 				String name = results.get(i).getName();
+ 	 			
+ 	 		%>
+ 	 				<div class="searchResult">
+	 					<span class="tickerSymbol"><%=symbol%></span> 
+	 					<span class="stockName"> <%=name%></span>
+	 				</div>
+	 		<%
+ 	 			}
+ 			}
+ 			%>
+ 			
+ 	
+ 			 
  			
  			
  		</div>
