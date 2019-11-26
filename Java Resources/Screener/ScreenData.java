@@ -59,7 +59,7 @@ public class ScreenData {
 		
 		while (n < numGroups) {
 			for(int j = idx; j < idx+5; j++) {
-				if(j < results.size()) {
+				if(j < companies.size()) {
 					url = url + companies.get(j) + ",";	
 				} else {
 					break;
