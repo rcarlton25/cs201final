@@ -12,28 +12,8 @@
 	      href="https://fonts.googleapis.com/css?family=Nunito&display=swap"
 	      rel="stylesheet"
 	    />
-		<script>
-				
-			function callServlet(){
-				event.preventDefault();
-				
-				let min = document.screenerForm.min.value;
-				let max = document.screenerForm.max.value;
-				let marketcap = document.screenerForm.marketcap.value;
-				
-				console.log("min: " + min);
-				console.log("max: " + max);
-				console.log("cap: " + marketcap);
+		<script src="getStockDetails.js"></script>
 
-				let url = "ScreeningServlet?min=" + min + "&max=" + max + "&cap=" + marketcap;
-
-				$.get(url, function(res){
-				});
-				
-				
-				console.log("submitted");
-			}
-		</script>
 	</head>
   
  	<body>
@@ -68,7 +48,6 @@
     
         <h1>SCREENER</h1>
     
-    
     	<form name="screenerForm" class="screenerForm" method="GET" action="ScreeningServlet">
     		<input type="number" name="min" placeholder="Min Cost"/>
     		<input type="number" name="max" placeholder="Max Cost"/>
@@ -76,7 +55,7 @@
     		<input type="submit" class="submitButton">
     	</form>
     	
-    	<div class="searchResults">
+    	<div class="searchResults" id="searchResults">
  			<% if(request.getAttribute("results") != null){
  				ArrayList<StockData> results = (ArrayList<StockData>) request.getAttribute("results");
  	 			System.out.println("results  = " + results.size());
@@ -87,7 +66,7 @@
  	 				String name = results.get(i).getName();
  	 			
  	 		%>
- 	 				<div class="searchResult">
+ 	 				<div class="searchResult" id=<%=symbol%> onclick="viewDetails(this);">
 	 					<span class="tickerSymbol"><%=symbol%></span> 
 	 					<span class="stockName"> <%=name%></span>
 	 				</div>
@@ -96,15 +75,10 @@
  			}
  			%>
  			
- 	
- 			 
- 			
- 			
  		</div>
  		
     </div>
  	
   	</body>
-
 
 </html>
