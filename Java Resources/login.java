@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -28,6 +29,8 @@ public class login extends HttpServlet {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String dbPass = null;
+		String error = "";
+		
 		int userID = -1;
 		int cnt = 0;
 		String nextPage = "/loginForm.jsp";
@@ -50,11 +53,13 @@ public class login extends HttpServlet {
 			System.out.println("cnt: " + cnt + " dbPass: " + dbPass + " userID: " +userID);
 			if(cnt == 0) { //Invalid username
 				request.setAttribute("loginErr", "Invalid Username");
+				error =  "Invalid Username";
 				nextPage ="/loginForm.jsp";
 				System.out.println("Invalid username");
 			}
 			else if( (cnt == 1) && !loginPass.contentEquals(dbPass) ) { //Incorrect password
 				request.setAttribute("loginErr", "Incorrect Password");
+				error =  "Incorrect Password";
 				nextPage ="/loginForm.jsp";
 				System.out.println("Incorrect Password");
 			}
@@ -67,8 +72,14 @@ public class login extends HttpServlet {
 			ps.close();
 			rs.close();
 			System.out.println("nextPage: " + nextPage);
-			RequestDispatcher dispatch = getServletContext().getRequestDispatcher(nextPage);
-			dispatch.forward(request, response);
+			
+			PrintWriter pw = response.getWriter();
+	    	pw.write(error);
+	    	pw.flush();
+	    	pw.close();
+	    	
+			//RequestDispatcher dispatch = getServletContext().getRequestDispatcher(nextPage);
+			//dispatch.forward(request, response);
 		}
 		catch (SQLException sqle){
 			System.out.println("SQLException: " + sqle.getMessage());

@@ -7,9 +7,25 @@ ul {
 li {
 	display: inline;
 }
+a:link, a:visited {
+	text-decoration: none;
+	color: white;
+}
+.links {
+/* 	padding-left: 20px; */
+/* 	padding-right: 20px; */
+/* 	padding: 8px; */
+/* 	margin-top: 10px; */
+	color: white;
+	margin-bottom: 10px;
+	font-size: 17px;
+}
 
 .leftNav, .rightNav {
 	height: 40px;
+}
+.title {
+	font-size: 45px;
 }
 
 .rightNav {
@@ -18,5 +34,20 @@ li {
 }
 
 .leftNav{
+	
 	padding: 5px 0 5px 10px;	
+}
+#signIn {
+	width: 10%;
+	float: right;
+/* 	margin-right: 20%; */
+/* 	padding-bottom: 5%; */
+	padding-right: 0%;
+	margin-bottom: 5%;
+}
+
+#border {
+	width: 100%;
+	height: 2px;
+	background: #D4DBEB;
 }
