@@ -30,8 +30,9 @@ Password <br>
 
 <br><a href="logOut">logOut</a>
 
-<script>
+<input type="text" value="<%= session.getAttribute("inFav") %>" />
 
+<script>
 	var ticker = "jpm";
 	var ar = "a";
 	var q = new XMLHttpRequest();
@@ -39,12 +40,21 @@ Password <br>
 			+ "&ar=" + ar, false);
 	q.send();
 	
+	var tickertwo = "jpm";
+	var arq = "q";
+	var query = new XMLHttpRequest();
+	query.open("GET", "addFav?ticker=" + ticker
+			+ "&ar=" + ar, false);
+	query.send();
+	
+	/*
 	var tt = "jpm";
 	var art = "r";
 	var qq = new XMLHttpRequest();
 	qq.open("GET", "addFav?ticker=" + tt
 			+"&ar=" + art, false);
 	qq.send();
+	*/
 	
 	
 	/*
