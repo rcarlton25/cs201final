@@ -7,21 +7,24 @@
 	<title>Insert title here</title>
 	<table>
             <tr>
-                <td colspan="2">
-                    <input type="text" id="username" placeholder="Username"/>
+                <td>
                     <button type="button" onclick="connect();" >Connect</button>
                 </td>
             </tr>
             <tr>
-                <td>
-                    <textarea readonly="true" rows="10" cols="80" id="log"></textarea>
-                </td>
+<!--                 <td> -->
+<!--                     <textarea readonly="true" rows="10" cols="80" id="log"></textarea> -->
+<!--                 </td> -->
             </tr>
             <tr>
                 <td>
-                    <input type="text" size="51" id="msg" placeholder="Message"/>
-                    <button type="button" onclick="send();" >Send</button>
+                    <button type="button" onclick="send();" >Would you like to see tips from bloomberg</button>
                 </td>
+            </tr>
+            <tr>
+            	<td>
+            		<div id = "log"></div>
+            	</td>
             </tr>
         </table>
     </body>
