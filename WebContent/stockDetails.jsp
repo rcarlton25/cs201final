@@ -11,12 +11,15 @@
 		
 		<script>
 			function showDetails() {
-				// get user data first
-				let user = true;
-				var userID = <%= session.getAttribute("userID") %>;
-				
 				let stockDataJSON = JSON.parse(localStorage["stockDataJSON"]);
-    			
+				
+				// Get user data first
+				var userID = <%= session.getAttribute("userID") %>;
+				// Query database
+				checkForFavorited(stockDataJSON.ticker, userID);
+				// Save as variable
+				var isFavorited = <%= session.getAttribute("inFav") %>;
+				
     			let stockName = document.createElement('p');
     			stockName.className = "stockName";
     			stockName.innerHTML = stockDataJSON.name;
@@ -70,9 +73,15 @@
     			
     			let saveButton = document.createElement('button');
     			saveButton.innerHTML = 'SAVE';
+    			option = "a";
     			if (userID != -1) {
+    				// Handle case where stock is already favorited
+    				if ("t" === isFavorited) {
+    					saveButton.innerHTML = 'REMOVE';
+    					option = "r";
+    				}
     				saveButton.onclick = function() {
-    					saveToWatchlist(stockDataJSON.ticker);
+    					editWatchlist(stockDataJSON.ticker, userID, option);
     				};
     			} else {
     				saveButton.onclick = function() {
@@ -95,6 +104,18 @@
 				alert("Please login or register to use this feature!");
 			}
 			
+			function checkForFavorited(ticker, userID) {
+				// addFav.java request
+ 				var xhttp = new XMLHttpRequest();
+ 				xhttp.open("GET", "addFav?ticker=" + ticker + "&userID=" + userID + "&ar=q", false);
+ 				xhttp.send();
+ 				if (xhttp.responseText.trim().length > 0) {
+ 					document.getElementById("error_msg").innerHTML = xhttp.responseText;
+ 					return false;
+ 				}
+ 				return true;
+			}
+			
 			function buyStocks(price, ticker) {
 				numToBuy = prompt("How many shares would you like to buy?");
 				
@@ -111,8 +132,7 @@
 	 				return true;
 					
 					alert("Shares bought.");
-				}
- 				
+				}	
 			}
 			
 			function sellStocks(price, ticker) {
@@ -134,10 +154,10 @@
 				}
 			}
 			
-			function saveToWatchlist(ticker) { //need to implement add and remove
+			function editWatchlist(ticker, userID, option) {
 				// addFav.java request
  				var xhttp = new XMLHttpRequest();
- 				xhttp.open("POST", "addFav?ticker=" + ticker + "&ar=a", false);
+ 				xhttp.open("POST", "addFav?ticker=" + ticker + "&userID=" + userID + "&ar=" + option, false);
  				xhttp.send();
  				if (xhttp.responseText.trim().length > 0) {
  					document.getElementById("error_msg").innerHTML = xhttp.responseText;
