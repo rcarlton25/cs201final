@@ -43,7 +43,7 @@
 		<script>
 			function showDetails() {
         
-        checkIfLoggedIn();
+       			checkIfLoggedIn();
         
 				let stockDataJSON = JSON.parse(localStorage["stockDataJSON"]);
 				
@@ -56,10 +56,22 @@
 				
     			let stockName = document.createElement('p');
     			stockName.className = "stockName";
+    			stockName.style.color = "rgb(127, 127, 127)";
+    			stockName.style.background = "white";
+    			stockName.style.marginLeft = "25%";
+    			stockName.style.marginRight = "25%";
+    			stockName.style.fontSize = "60px";
+    			stockName.style.textAlign = "center";
     			stockName.innerHTML = stockDataJSON.name;
     			
     			let stockPrice = document.createElement('p');
     			stockPrice.className = "stockPrice";
+    			stockPrice.style.color = "rgb(127, 127, 127)";
+    			stockPrice.style.background = "white";
+    			stockPrice.style.marginLeft = "25%";
+    			stockPrice.style.marginRight = "25%";
+    			stockPrice.style.fontSize = "60px";
+    			stockPrice.style.textAlign = "center";
     			stockPrice.innerHTML = stockDataJSON.price;
     			
     			// Build table
