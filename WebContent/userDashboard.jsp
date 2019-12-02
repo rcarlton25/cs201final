@@ -11,18 +11,22 @@
 		
 		<script>
 			var socket;
-			socket = new WebSocket("ws://localhost:5678/201_final_myfeatures/WebSocket");
 			
-			socket.onmessage= function(event) {
-				console.log("SUP BITCH: " + event.data);
+			function connect() {
+				socket = new WebSocket("ws://localhost:5678/201_final_myfeatures/WebSocket");
 				
-				$("#notification").append("<div class=" + "alert alert-info alert-dismissible" + ">" + event.data +  "<button type=" + "button "  + "class=" + "close " + " data-dismiss=" + "alert" + ">&times;</button></div>");
+				socket.onmessage= function(event) {
+					console.log("SUP BITCH: " + event.data);
+					
+					$("#notification").append("<div class=" + "alert alert-info alert-dismissible" + ">" + event.data +  "<button type=" + "button "  + "class=" + "close " + " data-dismiss=" + "alert" + ">&times;</button></div>");
+				}
 			}
+			
 		
 		</script>
 		
 	</head>
-	<body>
+	<body onload="connect()">
 		<!-- Save user preferences from the backend -->
 		<!-- using dummy data in 2D arrays for now -->
 		<% 
