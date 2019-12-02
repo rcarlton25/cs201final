@@ -18,6 +18,8 @@ public class logOut extends HttpServlet {
     protected void service (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	HttpSession session = request.getSession(true);
     	session.setAttribute("userID", -1);
+		session.setAttribute("username", null);
+
     	RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/homePage.jsp");
     	dispatch.forward(request, response);
     }

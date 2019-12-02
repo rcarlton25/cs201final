@@ -65,6 +65,9 @@ public class signup extends HttpServlet {
 				ps.setString(1, username);
 				ps.setString(2, password);
 				rs = ps.executeQuery();
+				
+				session.setAttribute("username", username);
+
 				while(rs.next()) {
 					session.setAttribute("userID", Integer.toString(rs.getInt("userID")));
 				}

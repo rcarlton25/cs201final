@@ -35,14 +35,30 @@ public class profile extends HttpServlet {
 		String[][] buy = new String[30][3];
 		try {
 			HttpSession session = request.getSession(true);
-			String id = (String) session.getAttribute("userID");
-			int userID = Integer.parseInt(id);
+			String username = (String) session.getAttribute("username");
+			System.out.println("HEYYYY");
+			//System.out.println((session.getAttribute("userID")));
+			//String id = (String)session.getAttribute("userID");
+			System.out.println(username);
+			//int userID = (int)session.getAttribute("userID");
+			
+			//String id = (String) session.getAttribute("userID");
+			//int userID = Integer.parseInt(i);
+			//int userID = String.valueOf(id);
 			
 			co = DriverManager.getConnection("jdbc:mysql://google/csfinal?cloudSqlInstance=cs-final-258501:us-central1:csfinal&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=csfinal&password=csfinal");
 			
+			ps = co.prepareStatement("select * from users where username=?");
+			ps.setString(1, username);
+			rs = ps.executeQuery();
+			int userID = -1;
+			while(rs.next()) {
+				userID = rs.getInt("userID");
+			}
 			//Get user's cash amount
-			ps = co.prepareStatement("select cash from users where userID=?");
-			ps.setInt(1, userID);
+			ps = co.prepareStatement("select cash from users where username=?");
+			//ps.setInt(1, userID);
+			ps.setString(1, username);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				cash = rs.getDouble("cash");
@@ -52,6 +68,7 @@ public class profile extends HttpServlet {
 			//Get shares owned by user
 			ps = co.prepareStatement("select * from profile where userID=? order by profID");
 			ps.setInt(1, userID);
+			//ps.setString(1, username);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				buy[i][0] = rs.getString("ticker");
@@ -63,6 +80,7 @@ public class profile extends HttpServlet {
 			//Get favorite shares
 			ps = co.prepareStatement("select * from fav where userID=?");
 			ps.setInt(1, userID);
+			//ps.setString(1, username);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				fav[j][0] = rs.getString("ticker");

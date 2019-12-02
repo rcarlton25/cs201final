@@ -66,6 +66,7 @@ public class login extends HttpServlet {
 			else { //Valid login
 				nextPage ="/homePage.jsp";
 				session.setAttribute("userID", userID);
+				session.setAttribute("username", username);
 			}
 			
 			co.close();
