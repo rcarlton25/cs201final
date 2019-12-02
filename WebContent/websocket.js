@@ -1,9 +1,7 @@
-var ws;
-
 function connect() {
 	//the websocket file actually belongs in the java folder
 	//Change path name! 
-	ws = new WebSocket("ws://localhost:9080/201_final_myfeatures/WebSocket");
+	ws = new WebSocket("ws://localhost:9081/cs201final_personal_new/WebSocket");
 
 	ws.onmessage = function(event) 
 	{

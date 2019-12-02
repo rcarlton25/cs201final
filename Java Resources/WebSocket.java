@@ -44,7 +44,7 @@ import com.google.gson.GsonBuilder;
 					 
 					 String desiredUrl = "https://newsapi.org/v2/top-headlines?"
 					 					+ "q="
-					 					+ "bitcoin"//keyword[keywordIndex]
+					 					+ keyword[keywordIndex]
 					 					+ "&apiKey=e6474870100341b68e1328b6a9cc838f";
 					 
 					 System.out.print(desiredUrl);
@@ -52,7 +52,7 @@ import com.google.gson.GsonBuilder;
 					 URL url = new URL(desiredUrl);
 					 HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 					 connection.setRequestMethod("GET");
-					 connection.setReadTimeout(15*1000);
+					 connection.setReadTimeout(45*10000);//  session will time out here
 					 connection.connect();
 					    
 					 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -83,7 +83,7 @@ import com.google.gson.GsonBuilder;
 	     };
 	     //CHANGE THIS- FOR LONGER DELAY MAKE THE TIME LONGER
 	     Timer timer = new Timer(true);
-	     timer.scheduleAtFixedRate(timerTask, 0, 3 * 100000); 
+	     timer.scheduleAtFixedRate(timerTask, 0, 3 * 10000); 
      }
 	 
 	 @OnClose 
