@@ -36,6 +36,14 @@
   	});
 
  }
+  
+	
+
+
+  
+  
+  
+  
 
   </script>
 	<head>
@@ -52,6 +60,10 @@
 			String[][] watchlistData = (String[][])request.getAttribute("watchlistData");
 			
 		%>
+		
+		<div id="notification">
+		
+		</div>
 				
  	
  		 <!-- Nav bar at top -->
