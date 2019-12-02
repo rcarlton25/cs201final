@@ -7,6 +7,20 @@
 		<link rel="stylesheet" href="styles/userDashboard.css">
 		<link rel="stylesheet" href="styles/navbar.css" />
 		<link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		
+		<script>
+			var socket;
+			socket = new WebSocket("ws://localhost:5678/201_final_myfeatures/WebSocket");
+			
+			socket.onmessage= function(event) {
+				console.log("SUP BITCH: " + event.data);
+				
+				$("#notification").append("<div class=" + "alert alert-info alert-dismissible" + ">" + event.data +  "<button type=" + "button "  + "class=" + "close " + " data-dismiss=" + "alert" + ">&times;</button></div>");
+			}
+		
+		</script>
+		
 	</head>
 	<body>
 		<!-- Save user preferences from the backend -->
@@ -24,11 +38,18 @@
 			};
 			
 		%>
+
+		<div id="notification">
 		
-		<!-- Nav bar at top -->
+		</div>
+
+		
+
+	<!-- Nav bar at top -->
 		<ul>
 			<li><a href="userDashboard.jsp"><img class="leftNav" src="images/newgraydashboardicon.png"></a></li>
 			<li><a href="searchPage.jsp"><img class="leftNav" src="images/newgraysearchicon.png"></a></li>
+			
 			<li><a href="screenerTool.jsp"><img class="rightNav" src="images/grayscreenicon.png"></a></li>
 			<li><a href="userProfile.jsp"><img class="rightNav" src="images/newgrayprofileicon.png"></a></li>
 		</ul>
@@ -80,4 +101,8 @@
 			<% } %>
 		</table>
 	</body>
+	
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </html>
