@@ -76,6 +76,15 @@
 		<h1>
 			PORTFOLIO
 		</h1>
+		<h2>Cash</h2>
+		<%System.out.println("HEY");
+		System.out.println(request.getAttribute("cash"));
+		%>
+		<% if (request.getAttribute("cash") == null) {%>
+			<h3>$0</h3>
+		<%} else { %>
+			<h3>$<%= request.getAttribute("cash") %></h3>
+		<%} %>
 		
 		<!-- Stocks -->
 		<h2>Stocks</h2>
