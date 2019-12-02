@@ -3,33 +3,40 @@
 <%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
-  <script>
-	  function checkIfLoggedIn() {
-		  var userID = <%=session.getAttribute("userID") %>;
-		  console.log(userID);
-		  if (userID == -1) { // user is not logged in
-			  console.log("equal to -1");
-			  return;
-		  }
-		  if (userID != null) { // then user is logged in
-			  $("#signIn").empty();
-			  $("#signIn").append("<p onclick=\"signOut()\" class=\"links\">Sign Out</p>");
-			  
-			  console.log("user is signed in");
-		  }
-	  }
-	  function signOut() {
-          $.ajax({
-      		url: "logOut",
-      		data: { },
-      		success: function(result) {
-      			$("#signIn").empty();
-  			    $("#signIn").append("<a href=\"loginForm.jsp\" class=\"links\">Login</a><br><a href=\"registerForm.jsp\" class=\"links\">Register</a>");
-      		}
-      	});
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-	 }
-  
+  <script>
+  function checkIfLoggedIn() {
+	  console.log("HELLLLLOOOOOOO");
+	  var userID = <%=session.getAttribute("userID") %>;
+	  console.log(userID);
+	  if (userID == -1) { // user is not logged in
+		  console.log("equal to -1");
+		  document.getElementById("disableLinks").innerHTML = "<style>" +
+			"a.disabled { pointer-events: none; cursor: default;}" +
+		    "</style>";
+		  return;
+	  }
+	  if (userID != null) { // then user is logged in
+		  $("#signIn").empty();
+		  $("#signIn").append("<p onclick=\"signOut()\" class=\"links\">Sign Out</p>");
+		  document.getElementById("disableLinks").innerHTML = "";
+
+		  console.log("user is signed in");
+	  }
+  }
+  function signOut() {
+      $.ajax({
+  		url: "logOut",
+  		data: { },
+  		success: function(result) {
+  			$("#signIn").empty();
+			    $("#signIn").append("<a href=\"loginForm.jsp\" class=\"links\">Login</a><br><a href=\"registerForm.jsp\" class=\"links\">Register</a>");
+  		}
+  	});
+
+ }
+
   </script>
 	<head>
 		<link rel="stylesheet" href="styles/userDashboard.css">
@@ -52,9 +59,9 @@
 	    
 	    	<ul class="navBar">
 				<li><a href="homePage.jsp" class="title">STOX</a></li>
-				<li><a href="userDashboard.jsp"><img class="rightNav" src="images/newgraydashboardicon.png"></a></li>
+				<li><a href="profile" class="disabled"><img class="rightNav" src="images/newgraydashboardicon.png"></a></li>
 				<li><a href="searchPage.jsp"><img class="rightNav" src="images/newgraysearchicon.png"></a></li>
-				<li><a href="screenerTool.jsp"><img class="rightNav" src="images/grayscreenicon.png"></a></li>
+				<li><a href="screenerTool.jsp" class="disabled"><img class="rightNav" src="images/grayscreenicon.png"></a></li>
 				
 				<li><div id="signIn"><a href="loginForm.jsp" class="links">Login</a><br>
 				<a href="registerForm.jsp" class="links">Register</a></div></li>
@@ -62,6 +69,7 @@
 			</ul>
 			
 			<div id="border"></div>
+				<div id="disableLinks"></div>
 		
 	    </div>
 		
@@ -71,8 +79,11 @@
 		
 		<!-- Stocks -->
 		<h2>Stocks</h2>
+		
+		<% if (stockData != null && stockData[0][0] != null) {%>
 		<table>
 			<% for (int i = 0; i < stockData.length; i++) {%>
+				
 				<tr class="upStock">
 				<!-- To redirect to details page for the stock, use a form -->
 					<td>
@@ -87,17 +98,25 @@
 					<td>$<%= stockData[i][2]%></td>
 				</tr>
 			<% } %>
-		</table>
+			</table>
+		<% } else { %>
+			<h3>You have no purchased stocks.</h3>
+		<%} %>
 		
 		
 		<!-- Watchlist -->
 		<h2>Watchlist</h2>
+		<% if (stockData != null && stockData[0][0] != null) {%>
 		<table>
 			<% for (int i = 0; i < watchlistData.length; i++) {%>
+			<%System.out.println(watchlistData); %>
 				<tr class ="upStock">
 					<td><%= watchlistData[i][0]%></td>
 				</tr>
 			<% } %>
 		</table>
+		<%} else { %>
+			<h3>You have no saved stocks.</h3>
+		<%} %>
 	</body>
 </html>

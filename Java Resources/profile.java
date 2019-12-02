@@ -23,6 +23,8 @@ public class profile extends HttpServlet {
     
     //FRONTEND: in front get attributes stockData, watchlistData, and cash
     protected void service (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    	System.out.println("inside service");
     	Connection co = null; 
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -33,7 +35,8 @@ public class profile extends HttpServlet {
 		String[][] buy = new String[30][3];
 		try {
 			HttpSession session = request.getSession(true);
-			int userID = (int)session.getAttribute("userID");
+			String id = (String) session.getAttribute("userID");
+			int userID = Integer.parseInt(id);
 			
 			co = DriverManager.getConnection("jdbc:mysql://google/csfinal?cloudSqlInstance=cs-final-258501:us-central1:csfinal&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=csfinal&password=csfinal");
 			
@@ -48,6 +51,7 @@ public class profile extends HttpServlet {
 			
 			//Get shares owned by user
 			ps = co.prepareStatement("select * from profile where userID=? order by profID");
+			ps.setInt(1, userID);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				buy[i][0] = rs.getString("ticker");
@@ -58,6 +62,7 @@ public class profile extends HttpServlet {
 			
 			//Get favorite shares
 			ps = co.prepareStatement("select * from fav where userID=?");
+			ps.setInt(1, userID);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				fav[j][0] = rs.getString("ticker");

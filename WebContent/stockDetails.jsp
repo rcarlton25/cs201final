@@ -83,7 +83,7 @@
 	    
 	    	<ul class="navBar">
 				<li><a href="homePage.jsp" class="title">STOX</a></li>
-				<li><a href="userDashboard.jsp" class="disabled"><img class="rightNav" src="images/newgraydashboardicon.png"></a></li>
+				<li><a href="profile" class="disabled"><img class="rightNav" src="images/newgraydashboardicon.png"></a></li>
 				<li><a href="searchPage.jsp"><img class="rightNav" src="images/newgraysearchicon.png"></a></li>
 				<li><a href="screenerTool.jsp" class="disabled"><img class="rightNav" src="images/grayscreenicon.png"></a></li>
 				
