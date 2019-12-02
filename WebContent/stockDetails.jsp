@@ -3,6 +3,37 @@
 <%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
+ <script>
+	  function checkIfLoggedIn() {
+		  var userID = <%=session.getAttribute("userID") %>;
+		  console.log(userID);
+		  if (userID == -1 || userID == null) { // user is not logged in
+			  console.log("equal to -1");
+		  	  document.getElementById("disableLinks").innerHTML = "<style>" +
+					"a.disabled { pointer-events: none; cursor: default;}" +
+				    "</style>";
+			  return;
+		  }
+		  if (userID != null) { // then user is logged in
+			  $("#signIn").empty();
+			  $("#signIn").append("<p onclick=\"signOut()\" class=\"links\">Sign Out</p>");
+			  document.getElementById("disableLinks").innerHTML = "";
+			  console.log("user is signed in");
+		  }
+	  }
+	  function signOut() {
+          $.ajax({
+      		url: "logOut",
+      		data: { },
+      		success: function(result) {
+      			$("#signIn").empty();
+  			    $("#signIn").append("<a href=\"loginForm.jsp\" class=\"links\">Login</a><br><a href=\"registerForm.jsp\" class=\"links\">Register</a>");
+      		}
+      	});
+
+	 }
+  
+  </script>
 	<head>
 		<!-- TODO: need to make error message div -->
 		<link rel="stylesheet" href="styles/stockDetails.css">
@@ -11,6 +42,9 @@
 		
 		<script>
 			function showDetails() {
+        
+        checkIfLoggedIn();
+        
 				let stockDataJSON = JSON.parse(localStorage["stockDataJSON"]);
 				
 				// Get user data first
@@ -170,16 +204,30 @@
 		</script>
 		
 	</head>
+
 	<body onload="showDetails();">
-		<!-- Nav bar at top -->
-		<ul>
-			<li><a href="userDashboard.jsp"><img class="leftNav" src="images/newgraydashboardicon.png"></a></li>
-			<li><a href="searchPage.jsp"><img class="leftNav" src="images/newgraysearchicon.png"></a></li>
-			<li><a href="screenerTool.jsp"><img class="rightNav" src="images/grayscreenicon.png"></a></li>
-			<li><a href="userProfile.jsp"><img class="rightNav" src="images/newgrayprofileicon.png"></a></li>
-		</ul>
+
+ 	
+ 		 <!-- Nav bar at top -->
+	     <div id="header">
+	    
+	    	<ul class="navBar">
+          <li><a href="homePage.jsp" class="title">STOX</a></li>
+          <li><a href="userDashboard.jsp" class="disabled"><img class="rightNav" src="images/newgraydashboardicon.png"></a></li>
+          <li><a href="searchPage.jsp"><img class="rightNav" src="images/newgraysearchicon.png"></a></li>
+          <li><a href="screenerTool.jsp" class="disabled"><img class="rightNav" src="images/grayscreenicon.png"></a></li>
+
+          <li><div id="signIn"><a href="loginForm.jsp" class="links">Login</a><br>
+				  <a href="registerForm.jsp" class="links">Register</a></div></li>
+				
+			</ul>
+			
+			<div id="border"></div>
+
 		
-		<div id="border"></div>
+	    </div>
+	    
+	    <div id="disableLinks"></div>
 		
 		<h1>
 			DETAILS

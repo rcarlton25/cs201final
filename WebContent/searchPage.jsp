@@ -2,6 +2,38 @@
 pageEncoding="UTF-8"%> <%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
+  <script>
+	  function checkIfLoggedIn() {
+		  var userID = <%=session.getAttribute("userID") %>;
+		  console.log(userID);
+		  if (userID == -1) { // user is not logged in
+			  console.log("equal to -1");
+			  document.getElementById("disableLinks").innerHTML = "<style>" +
+				"a.disabled { pointer-events: none; cursor: default;}" +
+			    "</style>";
+			  return;
+		  }
+		  if (userID != null) { // then user is logged in
+			  $("#signIn").empty();
+			  $("#signIn").append("<p onclick=\"signOut()\" class=\"links\">Sign Out</p>");
+			  document.getElementById("disableLinks").innerHTML = "";
+
+			  console.log("user is signed in");
+		  }
+	  }
+	  function signOut() {
+          $.ajax({
+      		url: "logOut",
+      		data: { },
+      		success: function(result) {
+      			$("#signIn").empty();
+  			    $("#signIn").append("<a href=\"loginForm.jsp\" class=\"links\">Login</a><br><a href=\"registerForm.jsp\" class=\"links\">Register</a>");
+      		}
+      	});
+
+	 }
+  
+  </script>
   <head>
     <link rel="stylesheet" href="styles/searchPage.css" />
     <link rel="stylesheet" href="styles/navbar.css" />
@@ -12,7 +44,7 @@ pageEncoding="UTF-8"%> <%@ page import="java.util.*" %>
     />
     
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    
+   <script src="getStockDetails.js"></script>
     
     <script>
 	    function makeApiCall(){
@@ -62,54 +94,29 @@ pageEncoding="UTF-8"%> <%@ page import="java.util.*" %>
 	   		}); 
     	}
     
-	    function viewDetails(result){
-	    	let symbol = result.id;
-	    	let url = "https://api.worldtradingdata.com/api/v1/stock?symbol=" + symbol + "&api_token=BLj5qqwiK1mbeAy32nSMUNDbrJaTiNoFTBm89tEHpJx3IZ9ysAnETDUdK2rv";
-	    	$.get(url, function(response){
-	    		
-	    		let stock = response.data[0];
-	         	let stockDataJSON = {};
-	         	
-	         	stockDataJSON["name"] = stock.name;
-	         	stockDataJSON["ticker"] = stock.symbol;
-	         	stockDataJSON["price"] = stock.price;
-	    		stockDataJSON["isGreen"] = parseFloat(stock.day_change) > 0 ? true : false;
-	         	stockDataJSON["cap"] = stock.market_cap;
-	         	stockDataJSON["yearlyHigh"] = stock["52_week_high"];
-	         	stockDataJSON["yearlyLow"] = stock["52_week_low"];
-	         	stockDataJSON["exchange"] = stock.stock_exchange_short;
-	         	
-	         	localStorage["stockDataJSON"] = JSON.stringify(stockDataJSON);
-	        	
-				window.location.href = "stockDetails.jsp";
-	    	});
-   		}    
+	    
     </script>
   </head>
-  <body>
-    <!-- Nav bar at top -->
-    <ul>
-      <li>
-        <a href="userDashboard.jsp"
-          ><img class="leftNav" src="images/newgraydashboardicon.png"
-        /></a>
-      </li>
-      <li>
-        <a href="searchPage.jsp"
-          ><img class="leftNav" src="images/newgraysearchicon.png"
-        /></a>
-      </li>
-      <li>
-        <a href="screenerTool.jsp"
-          ><img class="rightNav" src="images/grayscreenicon.png"
-        /></a>
-      </li>
-      <li>
-        <a href="userProfile.jsp"
-          ><img class="rightNav" src="images/newgrayprofileicon.png"
-        /></a>
-      </li>
-    </ul>
+  <body onload="checkIfLoggedIn()">
+ 	
+ 		 <!-- Nav bar at top -->
+     <div id="header">
+    
+    	<ul class="navBar">
+			<li><a href="homePage.jsp" class="title">STOX</a></li>
+			<li><a href="userDashboard.jsp" class="disabled"><img class="rightNav" src="images/newgraydashboardicon.png"></a></li>
+			<li><a href="searchPage.jsp"><img class="rightNav" src="images/newgraysearchicon.png"></a></li>
+			<li><a href="screenerTool.jsp" class="disabled"><img class="rightNav" src="images/grayscreenicon.png"></a></li>
+			
+			<li><div id="signIn"><a href="loginForm.jsp" class="links">Login</a><br>
+			<a href="registerForm.jsp" class="links">Register</a></div></li>
+			
+		</ul>
+		
+		<div id="border"></div>
+		<div id="disableLinks"></div>
+	
+    </div>
 
     <div id="border"></div>
     

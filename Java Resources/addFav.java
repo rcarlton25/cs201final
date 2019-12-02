@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,13 +19,14 @@ public class addFav extends HttpServlet {
     public addFav() { super(); }
 
     
-    //FRONTEND: pass in ticker(string), ar ("a"=add "r"=remove)
+    //FRONTEND: pass in ticker(string), ar ("a"=add "r"=remove q="query if in fav")
     protected void service (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	Connection co = null;
 		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String tf = "";
 		try {
 			HttpSession session = request.getSession(true);
-			session.setAttribute("userID", 1);
 			int userID = (int)session.getAttribute("userID");
 			String ticker = request.getParameter("ticker");
 			String ar = request.getParameter("ar");
@@ -39,6 +41,20 @@ public class addFav extends HttpServlet {
 				ps.setString(4, ticker);
 				ps.executeUpdate();
 			}
+			else if(ar.equals("q")) { //Query if it's in favorites
+				ps = co.prepareStatement("select * from fav where userID=? and ticker=?");
+				ps.setInt(1, userID);
+				ps.setString(2, ticker);
+				rs = ps.executeQuery();
+				if(rs.next()) {
+					tf = "t";
+					session.setAttribute("inFav", tf);
+				}
+				else {
+					tf = "f";
+					session.setAttribute("inFav", tf);
+				}
+			}
 			else { //Remove from favorites
 				ps = co.prepareStatement("delete from fav where userID=? and ticker=?");
 				ps.setInt(1, userID);
@@ -46,7 +62,7 @@ public class addFav extends HttpServlet {
 				ps.executeUpdate();
 			}
 			co.close();
-			ps.close();
+			ps.close();	
 		}
 		catch (SQLException sqle){
 			sqle.printStackTrace();
