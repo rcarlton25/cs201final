@@ -23,15 +23,25 @@ public class addFav extends HttpServlet {
     protected void service (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	Connection co = null;
 		PreparedStatement ps = null;
+		PreparedStatement pss = null;
 		ResultSet rs = null;
 		String tf = "";
 		try {
 			HttpSession session = request.getSession(true);
-			int userID = (int)session.getAttribute("userID");
+			//int userID = (int)session.getAttribute("userID");
+			String username = (String) session.getAttribute("username");
 			String ticker = request.getParameter("ticker");
 			String ar = request.getParameter("ar");
 	
 			co = DriverManager.getConnection("jdbc:mysql://google/csfinal?cloudSqlInstance=cs-final-258501:us-central1:csfinal&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=csfinal&password=csfinal");
+			
+			ps = co.prepareStatement("select * from users where username=?");
+			ps.setString(1, username);
+			rs = ps.executeQuery();
+			int userID = -1;
+			while(rs.next()) {
+				userID = rs.getInt("userID");
+			}
 			
 			if(ar.equals("a")) { //Add to favorites
 				ps = co.prepareStatement("INSERT INTO fav (userID, ticker) SELECT ?, ? WHERE NOT EXISTS (SELECT  * FROM fav where userId = ? and ticker = ?)");
@@ -42,10 +52,10 @@ public class addFav extends HttpServlet {
 				ps.executeUpdate();
 			}
 			else if(ar.equals("q")) { //Query if it's in favorites
-				ps = co.prepareStatement("select * from fav where userID=? and ticker=?");
-				ps.setInt(1, userID);
-				ps.setString(2, ticker);
-				rs = ps.executeQuery();
+				pss = co.prepareStatement("select * from fav where userID=? and ticker=?");
+				pss.setInt(1, userID);
+				pss.setString(2, ticker);
+				rs = pss.executeQuery();
 				if(rs.next()) {
 					tf = "t";
 					session.setAttribute("inFav", tf);
@@ -56,10 +66,10 @@ public class addFav extends HttpServlet {
 				}
 			}
 			else { //Remove from favorites
-				ps = co.prepareStatement("delete from fav where userID=? and ticker=?");
-				ps.setInt(1, userID);
-				ps.setString(2, ticker);
-				ps.executeUpdate();
+				pss = co.prepareStatement("delete from fav where userID=? and ticker=?");
+				pss.setInt(1, userID);
+				pss.setString(2, ticker);
+				pss.executeUpdate();
 			}
 			co.close();
 			ps.close();	

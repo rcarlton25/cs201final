@@ -89,10 +89,10 @@
 		<!-- Stocks -->
 		<h2>Stocks</h2>
 		
-		<% if (stockData != null && stockData[0][0] != null) {%>
+		<% if (stockData != null ) {%>
 		<table>
 			<% for (int i = 0; i < stockData.length; i++) {%>
-				
+				<%if (stockData[i][0] != null || stockData[i][1] != null || stockData[i][2] != null) {%>
 				<tr class="upStock">
 				<!-- To redirect to details page for the stock, use a form -->
 					<td>
@@ -106,6 +106,7 @@
 					<td><%= stockData[i][1]%><%= stockData[i][1] == "1" ? " share" : " shares"%></td>
 					<td>$<%= stockData[i][2]%></td>
 				</tr>
+				<%} %>
 			<% } %>
 			</table>
 		<% } else { %>
@@ -115,14 +116,17 @@
 		
 		<!-- Watchlist -->
 		<h2>Watchlist</h2>
-		<% if (stockData != null && stockData[0][0] != null) {%>
+		<% if ( watchlistData != null ) {%>
 		<table>
 			<% for (int i = 0; i < watchlistData.length; i++) {%>
+				<%if (watchlistData[i][0] != null) {%>
+			
 			<%System.out.println(watchlistData); %>
 				<tr class ="upStock">
 					<td><%= watchlistData[i][0]%></td>
 				</tr>
 			<% } %>
+			<%} %>
 		</table>
 		<%} else { %>
 			<h3>You have no saved stocks.</h3>

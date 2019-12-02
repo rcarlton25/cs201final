@@ -31,7 +31,8 @@ public class buySell extends HttpServlet {
 		ResultSet rsss = null;
 		try {
 			HttpSession session = request.getSession(true);
-			int userID = (int)session.getAttribute("userID");
+			//int userID = (int)session.getAttribute("userID");
+			String username = (String) session.getAttribute("username");
 		
 			String ticker = request.getParameter("ticker");
 			String bs = request.getParameter("bs");
@@ -42,11 +43,15 @@ public class buySell extends HttpServlet {
 	
 			co = DriverManager.getConnection("jdbc:mysql://google/csfinal?cloudSqlInstance=cs-final-258501:us-central1:csfinal&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=csfinal&password=csfinal");
 			
+			
+			
 			//Get user's cash amount
-			psss = co.prepareStatement("select cash from users where userID=?");
-			psss.setInt(1, userID);
+			psss = co.prepareStatement("select * from users where username=?");
+			psss.setString(1, username);
+			int userID = 1;
 			rsss = psss.executeQuery();
 			while(rsss.next()) {
+				userID = rsss.getInt("userID");
 				cash = rsss.getDouble("cash");
 			}
 			System.out.println("cash" + cash);
