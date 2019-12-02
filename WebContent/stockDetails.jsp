@@ -213,13 +213,12 @@
 	    
 	    	<ul class="navBar">
           <li><a href="homePage.jsp" class="title">STOX</a></li>
-          <li><a href="userDashboard.jsp" class="disabled"><img class="rightNav" src="images/newgraydashboardicon.png"></a></li>
+          <li><a href="profile" class="disabled"><img class="rightNav" src="images/newgraydashboardicon.png"></a></li>
           <li><a href="searchPage.jsp"><img class="rightNav" src="images/newgraysearchicon.png"></a></li>
           <li><a href="screenerTool.jsp" class="disabled"><img class="rightNav" src="images/grayscreenicon.png"></a></li>
 
           <li><div id="signIn"><a href="loginForm.jsp" class="links">Login</a><br>
-				  <a href="registerForm.jsp" class="links">Register</a></div></li>
-				
+          <a href="registerForm.jsp" class="links">Register</a></div></li>
 			</ul>
 			
 			<div id="border"></div>

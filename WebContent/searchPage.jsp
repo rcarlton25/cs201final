@@ -2,8 +2,11 @@
 pageEncoding="UTF-8"%> <%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
   <script>
 	  function checkIfLoggedIn() {
+		  console.log("HELLLLLOOOOOOO");
 		  var userID = <%=session.getAttribute("userID") %>;
 		  console.log(userID);
 		  if (userID == -1) { // user is not logged in
@@ -43,7 +46,6 @@ pageEncoding="UTF-8"%> <%@ page import="java.util.*" %>
       rel="stylesheet"
     />
     
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <script src="getStockDetails.js"></script>
     
     <script>
@@ -104,7 +106,7 @@ pageEncoding="UTF-8"%> <%@ page import="java.util.*" %>
     
     	<ul class="navBar">
 			<li><a href="homePage.jsp" class="title">STOX</a></li>
-			<li><a href="userDashboard.jsp" class="disabled"><img class="rightNav" src="images/newgraydashboardicon.png"></a></li>
+			<li><a href="profile" class="disabled"><img class="rightNav" src="images/newgraydashboardicon.png"></a></li>
 			<li><a href="searchPage.jsp"><img class="rightNav" src="images/newgraysearchicon.png"></a></li>
 			<li><a href="screenerTool.jsp" class="disabled"><img class="rightNav" src="images/grayscreenicon.png"></a></li>
 			
