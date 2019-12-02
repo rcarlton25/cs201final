@@ -52,7 +52,7 @@
 				// Query database
 				checkForFavorited(stockDataJSON.ticker, userID);
 				// Save as variable
-				var isFavorited = <%= session.getAttribute("inFav") %>;
+				var isFavorited = "<%= session.getAttribute("inFav") %>";
 				
     			let stockName = document.createElement('p');
     			stockName.className = "stockName";
