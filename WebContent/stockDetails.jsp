@@ -83,7 +83,7 @@
     			// Create buttons
     			let buyButton = document.createElement('button');
     			buyButton.innerHTML = 'BUY';
-    			if (userID != -1) {
+    			if (userID != -1 && userID != null) {
     				buyButton.onclick = function() {
     					buyStocks(stockDataJSON.price, stockDataJSON.ticker);
     				};
@@ -95,7 +95,7 @@
     			
     			let sellButton = document.createElement('button');
     			sellButton.innerHTML = 'SELL';
-    			if (userID != -1) {
+    			if (userID != -1 && userID != null) {
     				sellButton.onclick = function() {
     					sellStocks(stockDataJSON.price, stockDataJSON.ticker);
     				};
@@ -108,7 +108,7 @@
     			let saveButton = document.createElement('button');
     			saveButton.innerHTML = 'SAVE';
     			option = "a";
-    			if (userID != -1) {
+    			if (userID != -1 && userID != null) {
     				// Handle case where stock is already favorited
     				if ("t" === isFavorited) {
     					saveButton.innerHTML = 'REMOVE';
