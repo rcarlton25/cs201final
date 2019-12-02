@@ -4,9 +4,12 @@
 <!DOCTYPE html>
 <html>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
   <script>
+  
   function checkIfLoggedIn() {
+
 	  console.log("HELLLLLOOOOOOO");
 	  var userID = <%=session.getAttribute("userID") %>;
 	  console.log(userID);
@@ -36,6 +39,37 @@
   	});
 
  }
+  
+  /*  var ws;*/
+
+  function connect() {
+  	//the websocket file actually belongs in the java folder
+  	//Change path name! 
+  	ws = new WebSocket("ws://localhost:8081/cs201final_personal_new/WebSocket");
+  	ws.onmessage = function(event) 
+  	{
+  		console.log(event.data);
+  		var message = event.data;
+
+  		$("#notification").append("<div class=" + "alert alert-success alert-dismissible" + ">" + message +  "<button type=" + "button "  + "class=" + "close " + " data-dismiss=" + "alert" + ">&times;</button></div>");
+  	};
+  }
+
+
+
+  function send() {
+  	console.log("sending");
+  	var message = "message";
+  	ws.send(message);
+  }
+  
+	
+
+
+  
+  
+  
+  
 
   </script>
 	<head>
@@ -45,6 +79,8 @@
 	</head>
 	<body onload="checkIfLoggedIn()">		
 	
+	<button type="button" onclick="connect();">Subscribe</button>
+	<button type="button" onclick="send();">Get News</button>
 	<!-- Save user preferences from the backend -->
 		<% 
 			String[][] stockData = (String[][])request.getAttribute("stockData");
@@ -52,6 +88,10 @@
 			String[][] watchlistData = (String[][])request.getAttribute("watchlistData");
 			
 		%>
+		
+		<div id="notification">
+		
+		</div>
 				
  	
  		 <!-- Nav bar at top -->
@@ -131,5 +171,9 @@
 		<%} else { %>
 			<h3>You have no saved stocks.</h3>
 		<%} %>
+		
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	</body>
 </html>

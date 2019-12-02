@@ -67,12 +67,15 @@ input[type=number] {
 	margin: 15px 0;
 }
 
+<<<<<<< HEAD
 .searchResult:hover{
 	background-color: #B4C1E3;
 	transition: .25s;
 	cursor: pointer;
 }
 
+=======
+>>>>>>> uhh
 .stockName{
 	float: right;
 }
