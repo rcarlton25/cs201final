@@ -59,7 +59,7 @@
  
 
     <div id="formDiv">
-      <form name="loginForm" method="GET" action="homePage.jsp" onsubmit="return validate()">
+      <form name="loginForm" method="GET" action="searchPage.jsp" onsubmit="return validate()">
       	<h3>Login</h3>
       	<div id="usernameDiv">
 	        <h2>Username</h2>

@@ -57,7 +57,7 @@
     </div>
    
     <div id="formDiv">
-      <form name="registerForm" method="GET" action="homePage.jsp" onsubmit="return validate()">
+      <form name="registerForm" method="GET" action="searchPage.jsp" onsubmit="return validate()">
       	<h3>Register</h3>
       	<div id="usernameDiv">
 	        <h2>Username</h2>
