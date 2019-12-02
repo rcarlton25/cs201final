@@ -47,7 +47,7 @@ public class profile extends HttpServlet {
 			System.out.println("cash" + cash);
 			
 			//Get shares owned by user
-			ps = co.prepareStatement("select * from profile where userID=?");
+			ps = co.prepareStatement("select * from profile where userID=? order by profID");
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				buy[i][0] = rs.getString("ticker");
