@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-	<head>
+	<head>																	
 		<meta charset="UTF-8">
 		<title>Home</title>
 		<link rel="stylesheet" href="styles/homePage.css">

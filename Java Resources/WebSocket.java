@@ -34,7 +34,6 @@ import com.google.gson.GsonBuilder;
 				 	"liability", "insurance", "debt", "stock market"};
 		 
 		 Random r = new Random();
-		 
 		 TimerTask timerTask = new TimerTask() {
 	     Gson gson = null;
 	     GsonBuilder builder = null;
@@ -45,9 +44,10 @@ import com.google.gson.GsonBuilder;
 					 
 					 String desiredUrl = "https://newsapi.org/v2/top-headlines?"
 					 					+ "q="
-					 					+ keyword[keywordIndex]
+					 					+ "bitcoin"//keyword[keywordIndex]
 					 					+ "&apiKey=e6474870100341b68e1328b6a9cc838f";
 					 
+					 System.out.print(desiredUrl);
 					 
 					 URL url = new URL(desiredUrl);
 					 HttpURLConnection connection = (HttpURLConnection)url.openConnection();
@@ -67,7 +67,7 @@ import com.google.gson.GsonBuilder;
 					 builder = new GsonBuilder();
 					 builder.setPrettyPrinting();
 					 gson = builder.create();
-					 
+					 System.out.println(jsonString);
 					 SearchResult results = gson.fromJson(jsonString, SearchResult.class);
 					 //FOR TESTING PURPOSES JUST PRINT OUT THE TITLE
 					 String firstTitle = results.articles[0].title;
@@ -83,7 +83,7 @@ import com.google.gson.GsonBuilder;
 	     };
 	     //CHANGE THIS- FOR LONGER DELAY MAKE THE TIME LONGER
 	     Timer timer = new Timer(true);
-	     timer.scheduleAtFixedRate(timerTask, 0, 3 * 1000); 
+	     timer.scheduleAtFixedRate(timerTask, 0, 3 * 100000); 
      }
 	 
 	 @OnClose 
