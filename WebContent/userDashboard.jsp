@@ -4,14 +4,13 @@
 <!DOCTYPE html>
 <html>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-   <script src="websocket.js"></script>
 
   <script>
   function checkIfLoggedIn() {
+	  var ws;
 	  
 	  
-	  
-	  connect();
+	  connect(ws);
 	  send();
 	  console.log("HELLLLLOOOOOOO");
 	  var userID = <%=session.getAttribute("userID") %>;
@@ -43,9 +42,9 @@
 
  }
   
-  var ws;
+  /*  var ws;*/
 
-  function connect() {
+  function connect(ws) {
   	//the websocket file actually belongs in the java folder
   	//Change path name! 
   	ws = new WebSocket("ws://localhost:9080/201_final_myfeatures/WebSocket");
