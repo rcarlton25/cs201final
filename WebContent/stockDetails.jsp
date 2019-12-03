@@ -172,11 +172,10 @@
 							+ "&shares=" + numToBuy, false);
 	 				xhttp.send();
 	 				if (xhttp.responseText.trim().length > 0) {
-	 					document.getElementById("error_msg").innerHTML = xhttp.responseText;
+	 					alert(xhttp.responseText);
 	 					return false;
 	 				}
 	 				return true;
-					
 					alert("Shares bought.");
 				}	
 			}
@@ -191,11 +190,10 @@
 							+ "&shares=" + numToSell, false);
 	 				xhttp.send();
 	 				if (xhttp.responseText.trim().length > 0) {
-	 					document.getElementById("error_msg").innerHTML = xhttp.responseText;
+	 					alert(xhttp.responseText);
 	 					return false;
 	 				}
 	 				return true;
-					
 					alert("Shares sold.");
 				}
 			}
@@ -206,7 +204,6 @@
  				xhttp.open("POST", "addFav?ticker=" + ticker + "&userID=" + userID + "&ar=" + option, false);
  				xhttp.send();
  				if (xhttp.responseText.trim().length > 0) {
- 					document.getElementById("error_msg").innerHTML = xhttp.responseText;
  					return false;
  				} else {
  					alert("Stock saved to your dashboard!");
@@ -214,12 +211,9 @@
  				return true;
 			}
 		</script>
-		
 	</head>
 
 	<body onload="showDetails();">
-
- 	
  		 <!-- Nav bar at top -->
 	     <div id="header">
 	    
@@ -244,7 +238,5 @@
 			DETAILS
 		</h1>
 		<div id="details"></div>
-		<div id="error_msg"></div>
-
 	</body>
 </html>
