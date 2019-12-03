@@ -87,7 +87,12 @@
  				ArrayList<StockData> results = (ArrayList<StockData>) request.getAttribute("results");
  	 			System.out.println("results  = " + results.size());
  	 			
- 	 			
+ 	 			if(results.size()==0){
+ 	 				%>
+ 	 				<div class="errormsg">No results found.</div>
+ 	 				<%
+ 	 			}
+ 	 		
  	 			for(int i = 0; i < results.size(); i++) { 
  	 				String symbol = results.get(i).getSymbol();
  	 				String name = results.get(i).getName();
