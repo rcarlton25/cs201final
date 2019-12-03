@@ -30,7 +30,7 @@
       		success: function(result) {
       			$("#signIn").empty();
   			    $("#signIn").append("<a href=\"loginForm.jsp\" class=\"links\">Login</a><br><a href=\"registerForm.jsp\" class=\"links\">Register</a>");
-      			location.href = '/homePage.jsp';
+      			location.href = 'homePage.jsp';
       		}
       	});
 
