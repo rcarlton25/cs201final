@@ -33,7 +33,7 @@ h2 {
 
 input[type=number] {
     -webkit-appearance: none;  
- 	width: 22%;
+ 	width: 20%;
     height: 75px;
     box-sizing: content-box;
     font-size: 30px;
@@ -49,8 +49,7 @@ input[type=number] {
 	font-family: 'Nunito', sans-serif;
     background-color: #003344;
     color: white;
-    width: 25%;
-    min-width: 115px;
+    width: 22%;
     height: 75px;
     border-width: 0;
     padding: 5px 0;
@@ -67,15 +66,12 @@ input[type=number] {
 	margin: 15px 0;
 }
 
-<<<<<<< HEAD
 .searchResult:hover{
 	background-color: #B4C1E3;
 	transition: .25s;
 	cursor: pointer;
 }
 
-=======
->>>>>>> uhh
 .stockName{
 	float: right;
 }

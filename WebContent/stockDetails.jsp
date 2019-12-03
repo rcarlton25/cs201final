@@ -37,6 +37,8 @@
 	<head>
 		<!-- TODO: need to make error message div -->
 		<link rel="stylesheet" href="styles/stockDetails.css">
+		<link rel="stylesheet" href="styles/navbar.css" />
+		
 		<link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		
