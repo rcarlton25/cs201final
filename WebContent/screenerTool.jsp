@@ -74,13 +74,16 @@
     <div class="pageContent">
     
         <h1>SCREENER</h1>
-    
-    	<form name="screenerForm" class="screenerForm" method="GET" action="ScreeningServlet">
-    		<input type="number" name="min" placeholder="Min Cost"/>
-    		<input type="number" name="max" placeholder="Max Cost"/>
-    		<input type="number" name="marketcap" placeholder="Market Cap"/>
-    		<input type="submit" class="submitButton">
-    	</form>
+        
+    	<div class="formDiv">
+	    	<form name="screenerForm" class="screenerForm" method="GET" action="ScreeningServlet">
+	    		<input type="number" name="min" placeholder="Min Cost"/>
+	    		<input type="number" name="max" placeholder="Max Cost"/>
+	    		<input type="number" name="marketcap" placeholder="Market Cap"/>
+	    		<input type="submit" class="submitButton">
+	    	</form>
+    	</div>
+    	
     	
     	<div class="searchResults" id="searchResults">
  			<% if(request.getAttribute("results") != null){
